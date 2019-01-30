@@ -1,0 +1,4 @@
+flask
+gunicorn
+json-logging-py
+redis
