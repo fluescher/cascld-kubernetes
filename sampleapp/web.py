@@ -1,12 +1,14 @@
 #!/usr/bin/python
 
 import os
+import logging
 
 from flask import Flask, request, redirect
 from flask import render_template
 
 app = Flask(__name__)
 
+logger = logging.getLogger('gunicorn.error')
 
 class InMemoryBids:
     def __init__(self):
@@ -33,8 +35,10 @@ class RedisBids:
 
 def create_bids():
     if "REDIS_HOST" in os.environ:
+        logger.info("Using redis backend on " + os.getenv("REDIS_HOST"))
         return RedisBids(os.getenv("REDIS_HOST"))
     else:
+        logger.info("Using inmemory bid store")
         return InMemoryBids()
 
 bids = create_bids()
