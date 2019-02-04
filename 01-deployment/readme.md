@@ -30,17 +30,21 @@ Now it's time to deploy our first service. Use the following yml to deploy nginx
 ```yml
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: web
 spec:
+  selector:
+    matchLabels:
+      app: web
   template:
     metadata:
       labels:
-        app: nginx
+        app: web
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+      - name: web
+        image: nginx
+
 ```
 
 Monitor the deployment of your webserver using the following command: `kubectl get pods -w`
