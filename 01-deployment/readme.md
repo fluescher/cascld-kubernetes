@@ -70,7 +70,7 @@ curl -i <podip>
 
 ## 4. Deploy our sampleapplication
 
-After we saw our deployment worked let's deploy our sample application using the image `cascld/sampleapp:latest`. The application listens on port 8000. Show the logs of the newly started pod using `kubectl logs <podname>`
+After we saw our deployment worked let's deploy our sample application using the image `fluescher/cascld:latest`. The application listens on port 8000. Show the logs of the newly started pod using `kubectl logs <podname>`
 
 To view the application in your browser, you can use port forwarding: `kubectl port-forward <podname> 8000:8000` and then visit localhost:8000
 

@@ -31,9 +31,9 @@ Now access this service using its name and try to answer the following questions
 
 Now change the type of the created service (you need to delete it to change the type: `kubectl delete svc auction`). Compare the output of the name resolution `nslookup auction`
 
-1. Change the service type to NodePort. What changes? 
-2. Add the clusterIP: None to your service definition. What happened now? On which port do you reach the webapp now?
+1. Change the service type to NodePort. What changes? Can you access your service from outside?
+2. Add the clusterIP: None to your service definition. What happened now? On which port do you reach the service now?
 
 ## 3. Add redis service
 
-Now configure another service and replace the ip of the redis port in the web app descriptor.
+Now configure another service for our redis pod and replace the ip of the redis port in the web app descriptor.
