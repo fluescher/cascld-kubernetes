@@ -77,6 +77,21 @@ After we saw our deployment worked let's deploy our sample application using the
 
 To view the application in your browser, you can use port forwarding: `kubectl port-forward <podname> 8000:80` and then visit localhost:8000
 
+
+## 5. Limit Resources
+
+TODO
+
+- 100mb
+- 100m CPU
+
+## 6. Add Health Checks 
+
+TODO
+
+- Healthcheck
+- liveness check
+
 ## Questions
 
 1. What IP was assigned to your newly created POD? 
@@ -84,3 +99,4 @@ To view the application in your browser, you can use port forwarding: `kubectl p
 3. Can you ping it from your host? 
 4. Can you ping it from your bastion pod?
 5. Are you able to connect to your application using port forwarding?
+6. What happens if you misconfigure the health check (by using a wrong port)?
