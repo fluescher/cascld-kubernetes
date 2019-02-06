@@ -1,5 +1,8 @@
 # 01 - Application Deployment
 
+It's best to use a local Kubernetes cluser to do our experiments. You can use Minikube for this. Follow the [installation instructions](https://kubernetes.io/docs/tasks/tools/install-minikube/). After the installation you can start minikube:
+
+`minikube start`
 
 ## 0. Connect to your cluster
 
