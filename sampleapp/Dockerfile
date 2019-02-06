@@ -8,5 +8,7 @@ RUN pip install -r requirements.txt
 
 ADD . /tmp/app/
 
-ENTRYPOINT ["/usr/local/bin/gunicorn", "-b", ":8000", "web:app"]
+ENV PORT 80
+
+ENTRYPOINT /usr/local/bin/gunicorn -b :${PORT} web:app
 

@@ -52,3 +52,4 @@ Now delete the redis pod and wait for it to be restarted. What's the highest bid
 
 - Can you mount this volume in another pod (web for example)?
 - What happens if you scale the redis deployment to multiple instances?
+- What do you need to do to mount the volume in multiple pods?
