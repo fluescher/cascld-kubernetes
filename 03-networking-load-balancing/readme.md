@@ -1,6 +1,5 @@
 # 03 - Networking: Load Balancing
 
-
 ## 1. Register a service
 
 We already scaled our webapplication. But using the pod IPs does not scale very well. We can register our webapplciation pods using a service and exposing them with an DNS entry.
@@ -8,7 +7,7 @@ We already scaled our webapplication. But using the pod IPs does not scale very 
 Create a service:
 
 ```yml
-apiVersion: apps/v1
+apiVersion: v1
 kind: Service
 metadata:
   name: auction
@@ -16,16 +15,16 @@ spec:
   selector:
     app: web
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8000
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
 ```
 
 Now access this service using its name and try to answer the following questions.
 
 - What kind of service did you create?
 - Whats the IP of this service?
-- Which instance do you connect to? Maybe turn of redis and try again. What do you see?
 
 ## 2. Add different Service type
 
@@ -34,6 +33,10 @@ Now change the type of the created service (you need to delete it to change the 
 1. Change the service type to NodePort. What changes? Can you access your service from outside?
 2. Add the clusterIP: None to your service definition. What happened now? On which port do you reach the service now?
 
+- Which instance do you connect to? Maybe turn of redis and try again. What do you see?
+
 ## 3. Add redis service
 
 Now configure another service for our redis pod and replace the ip of the redis port in the web app descriptor.
+
+

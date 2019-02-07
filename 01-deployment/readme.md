@@ -28,7 +28,7 @@ kubectl config set-context $(kubectl config current-context) --namespace=cas
 
 ## 2. Deploy the webapplication
 
-Now it's time to deploy our first service. Use the following yml to deploy nginx in your cluster (`kubectl apply -f web.yml`):
+Now it's time to deploy our first service. Use the following yml to deploy nginx (Webserver) in your cluster (`kubectl apply -f web.yml`):
 
 ```yml
 apiVersion: apps/v1
@@ -45,13 +45,11 @@ spec:
         app: web
     spec:
       containers:
-      - name: web
-        image: nginx
-
+        - name: web
+          image: nginx
 ```
 
 Monitor the deployment of your webserver using the following command: `kubectl get pods -w`
-
 
 ## 3. Connect to your webserver
 
@@ -61,11 +59,13 @@ After the deployment is finished create another temporary pod to use as a bastio
 kubectl run my-shell --rm -it --image amouat/network-utils -- bash
 ```
 
-Find out the cluster ip of your pod:
+Find out the cluster ip of your pod (execute this on your machine):
 
 ```bash
 kubectl get pods -o wide
 ```
+
+Execute on the connected bastion pod.
 
 ```bash
 curl -i <podip>
@@ -73,10 +73,18 @@ curl -i <podip>
 
 ## 4. Deploy our sampleapplication
 
-After we saw our deployment worked let's deploy our sample application using the image `fluescher/cascld:latest`. The application listens on port 80. Show the logs of the newly started pod using `kubectl logs <podname>`
+After we saw our deployment worked let's deploy our sample application using the image `fluescher/cascld:latest`.
 
-To view the application in your browser, you can use port forwarding: `kubectl port-forward <podname> 8000:80` and then visit localhost:8000
+// Wie sollen sie dies deplyoen?
+`kubectl run cascld --image fluescher/cascld:latest`
 
+The application listens on port 80. Show the logs of the newly started pod using `kubectl logs <podname>`
+
+To view the application in your browser, you can use port forwarding: `kubectl port-forward <podname> 8000:80` and then visit localhost:8000.
+
+You should see this page:
+
+// Bild der Webseite
 
 ## 5. Limit Resources
 
@@ -85,7 +93,7 @@ TODO
 - 100mb
 - 100m CPU
 
-## 6. Add Health Checks 
+## 6. Add Health Checks
 
 TODO
 
@@ -94,9 +102,9 @@ TODO
 
 ## Questions
 
-1. What IP was assigned to your newly created POD? 
-2. What is the subnet of this ip? 
-3. Can you ping it from your host? 
+1. What IP was assigned to your newly created POD?
+2. What is the subnet of this ip?
+3. Can you ping it from your host?
 4. Can you ping it from your bastion pod?
 5. Are you able to connect to your application using port forwarding?
 6. What happens if you misconfigure the health check (by using a wrong port)?
