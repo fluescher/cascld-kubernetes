@@ -1,7 +1,5 @@
 # Storage
 
-## Redis Storage
-
 Since the data of our auction service is very important, we want to save it to disk. In order to do that we can change our redis configuration to include `appendonly yes`. This way Redis stores every change to a local append only file.
 
 Connect to the redis container and see what is stored in `/data`. Add some bids using the Auction frontend, how does the data in that folder change?
@@ -12,11 +10,11 @@ Now restart the redis instance by deleting the pod
 
 Check the data in /data again. Open the Auction Webapp. What's the highest bid?
 
-## Create a Persistent Volume Claim
+## 1. Create a Persistent Volume Claim
 
 First we create a volume claim, so that we can mount it to redis afterwards:
 
-```
+```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -33,7 +31,7 @@ Get the information of the created volume:
 
 `kubectl get persistentvolumeclaim`
 
-## Mount the volume
+## 2. Mount the volume
 
 With our newly created volume, we are able to mount it to store our redis data. We can add this snippet to our redis-deployment:
 

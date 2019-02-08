@@ -73,10 +73,7 @@ curl -i <podip>
 
 ## 4. Deploy our sampleapplication
 
-After we saw our deployment worked let's deploy our sample application using the image `fluescher/cascld:latest`.
-
-// Wie sollen sie dies deplyoen?
-`kubectl run cascld --image fluescher/cascld:latest`
+After we saw our deployment worked let's deploy our sample application using the image `fluescher/cascld:latest`. To do that, take the YAML file of your first deployment and change the image name.
 
 The application listens on port 80. Show the logs of the newly started pod using `kubectl logs <podname>`
 
@@ -84,21 +81,17 @@ To view the application in your browser, you can use port forwarding: `kubectl p
 
 You should see this page:
 
-// Bild der Webseite
+![Webapp](webapp.png "Auction App")
 
-## 5. Limit Resources
+## 5. (Bonus) Limit Resources
 
-TODO
+Limit the resources of the webapplication to 100MB of RAM and 100 Mili CPUs. You find an example here: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory
 
-- 100mb
-- 100m CPU
+## 6. (Bonus) Add Health Checks
 
-## 6. Add Health Checks
+Configure both a liveness check and a readyness probe for the webapplication. Use a TCP liveness probe https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-a-tcp-liveness-probe and a HTTP readyness probe https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-a-liveness-http-request
 
-TODO
-
-- Healthcheck
-- liveness check
+- What happens if you misconfigure the health check (by using a wrong port)?
 
 ## Questions
 
@@ -107,4 +100,4 @@ TODO
 3. Can you ping it from your host?
 4. Can you ping it from your bastion pod?
 5. Are you able to connect to your application using port forwarding?
-6. What happens if you misconfigure the health check (by using a wrong port)?
+

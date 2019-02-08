@@ -8,7 +8,7 @@ Get the IP:
 
 `minikube ip`
 
-and then try to access that ip:
+and then try to access that ip from your machine:
 
 `curl -i <ip>`
 
@@ -20,7 +20,7 @@ This creates new pods. Wait until alle pods are running.
 
 `kubectl get pods --all-namespaces`
 
-Access the node again:
+Access the node again from your machine:
 
 `curl -i <ip>`
 
@@ -28,7 +28,7 @@ Access the node again:
 - What was deployed on your cluster? Check all running pods in your cluster: `kubectl get --all-namespaces pods`
 - Where does the answer for your HTTP GET come from?
 
-## Create an ingress resource
+## 1. Create an ingress resource
 
 Let's add a route to our auction backend:
 
@@ -49,9 +49,9 @@ spec:
               servicePort: 80
 ```
 
-No if you connect with your browser to the minikube ip you should see.
+No if you connect with your browser to the minikube ip you should see the auction app again:
 
-// Image
+![Webapp](webapp.png "Auction App")
 
 - What happens if you configured a wrong backend?
 - Can you access the ingress ressource from outside of the cluster?

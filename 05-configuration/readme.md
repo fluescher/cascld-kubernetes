@@ -10,7 +10,7 @@ Do you see a line like:
 1:C 05 Feb 2019 07:26:23.659 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
 ```
 
-## Add a ConfigMap
+## 1. Add a ConfigMap
 
 So let's give Redis a configuration file. Create a ConfigMap with the following content:
 
@@ -47,7 +47,7 @@ Have a look at the kubernetes documentation to see a working example: https://ku
 
 After you applied your changes you can have another look at the logs of the redis instance. There shouldn't be any more warnings. 
 
-## Check our changes
+## 2. Check our changes
 
 To check what we changed inside the container let's connect to the redis pod:
 

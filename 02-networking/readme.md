@@ -8,7 +8,7 @@ It's time to scale our deployment. Add another instance of our webapplication:
 kubectl scale --replicas=2 deployment/web
 ```
 
-Connect to both the instance using port-forwarding.
+Connect to both the instances using port-forwarding.
 
 - What do you notice when comparing the highest bids?
 - Why is that?
@@ -16,9 +16,7 @@ Connect to both the instance using port-forwarding.
 ## 2. Adding another service
 
 Thankfully our webapplication allows to store state in an external Redis Instance. Let's add our
-redis instance:
-
-// Create a new yaml file? e.g. redis.yml
+redis instance. To do that create a new yaml file called redis.yml with the following content:
 
 ```yml
 apiVersion: apps/v1
@@ -46,9 +44,8 @@ Watch the application getting deployed.
 
 ## 2. Connect the two services together
 
-Let's use our newly deployed service. Our webapplication can be configured to use it by setting the environment propery `REDIS_HOST` to the IP of our newly deployed Redis instance.
-// Maybe add link to
-https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
+Let's use our newly deployed service. Our webapplication can be configured to use it by setting the environment propery `REDIS_HOST` to the IP of our newly deployed Redis instance. Have a look at 
+https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/ to see how a environment variable can be set.
 
 Update the web deployment descriptor to add the environment property.
 
