@@ -89,7 +89,7 @@ Limit the resources of the webapplication to 100MB of RAM and 100 Mili CPUs. You
 
 ## 6. (Bonus) Add Health Checks
 
-Configure both a liveness check and a readyness probe for the webapplication. Use a TCP liveness probe https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-a-tcp-liveness-probe and a HTTP readyness probe https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-a-liveness-http-request
+Configure both a liveness check and a readiness probe for the webapplication. Use a TCP liveness probe https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-a-tcp-liveness-probe and a HTTP readiness probe https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-a-liveness-http-request
 
 - What happens if you misconfigure the health check (by using a wrong port)?
 
