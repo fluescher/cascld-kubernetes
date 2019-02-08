@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os
+import socket
 import logging
 
 from flask import Flask, request, redirect
@@ -41,11 +42,15 @@ def create_bids():
         logger.info("Using inmemory bid store")
         return InMemoryBids()
 
+def get_hostname():   
+    return socket.gethostname()
+
 bids = create_bids()
 
 @app.route("/")
 def index():
-    return render_template("index.html", highest=bids.highest())
+    hostname = get_hostname()
+    return render_template("index.html", hostname=hostname, highest=bids.highest())
 
 @app.route("/bid", methods=["POST"])
 def bid():
