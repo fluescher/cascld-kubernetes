@@ -1,12 +1,12 @@
 FROM python:3.6-alpine 
 
-RUN mkdir /tmp/app/
-WORKDIR /tmp/app
+# Copy local code to the container image.
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . .
 
 ADD requirements.txt /tmp/app/requirements.txt
 RUN pip install -r requirements.txt
-
-ADD . /tmp/app/
 
 ENV PORT 80
 
