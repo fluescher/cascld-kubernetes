@@ -5,7 +5,6 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . .
 
-ADD requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
 ENV PORT 80
