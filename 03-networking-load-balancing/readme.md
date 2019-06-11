@@ -2,7 +2,7 @@
 
 ## 1. Register a service
 
-We already scaled our webapplication. But using the pod IPs does not scale very well. We can register our webapplciation pods using a service and exposing them with an DNS entry.
+We already scaled our webapplication. But using the pod IPs does not scale very well. We can register our webapplication pods using a service and exposing them with an DNS entry.
 
 Create a service:
 
