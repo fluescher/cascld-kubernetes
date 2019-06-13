@@ -30,17 +30,17 @@ Add the following snippets to the redis container specification:
 command: ["redis-server"]
 args: ["/tmp/redis.config"]
 volumeMounts:
-    - name: redis-config-vol
-      mountPath: /tmp/
+  - name: redis-config-vol
+    mountPath: /tmp/
 ```
 
 and this:
 
 ```yaml
 volumes:
-    - name: redis-config-vol
-      configMap:
-        name: redis-config
+  - name: redis-config-vol
+    configMap:
+      name: redis-config
 ```
 
 Have a look at the kubernetes documentation to see a working example: https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#add-configmap-data-to-a-specific-path-in-the-volume
