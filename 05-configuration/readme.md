@@ -4,7 +4,7 @@ Have a look at the output of the redis instance:
 
 `kubectl logs <redis-pod-name>`
 
-Do you see a line like: 
+Do you see a line like:
 
 ```
 1:C 05 Feb 2019 07:26:23.659 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
@@ -45,7 +45,7 @@ volumes:
 
 Have a look at the kubernetes documentation to see a working example: https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#add-configmap-data-to-a-specific-path-in-the-volume
 
-After you applied your changes you can have another look at the logs of the redis instance. There shouldn't be any more warnings. 
+After you applied your changes you can have another look at the logs of the redis instance. There shouldn't be any more warnings.
 
 ## 2. Check our changes
 
