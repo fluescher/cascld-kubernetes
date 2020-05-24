@@ -26,7 +26,8 @@ class RedisBids:
     def __init__(self, host='localhost'):
         import redis
         if "REDIS_AUTH_TOKEN" in os.environ:
-            self.r = redis.Redis(host=host, port=6379, db=0, password=os.getenv("REDIS_AUTH_TOKEN"))
+            logger.info("Using auth token " + os.getenv("REDIS_AUTH_TOKEN"))
+            self.r = redis.Redis(host=host, port=6379, db=0, password=os.getenv("REDIS_AUTH_TOKEN"), ssl=True)
         else:   
             self.r = redis.Redis(host=host, port=6379, db=0)
     
@@ -50,12 +51,12 @@ def get_hostname():
 
 bids = create_bids()
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
     hostname = get_hostname()
     return render_template("index.html", hostname=hostname, highest=bids.highest())
 
-@app.route("/bid", methods=["POST"])
+@app.route("/", methods=["POST"])
 def bid():
     bid = int(request.form['bid'])
     bids.add_bid(bid)
