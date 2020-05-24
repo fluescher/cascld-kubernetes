@@ -25,7 +25,10 @@ class InMemoryBids:
 class RedisBids:
     def __init__(self, host='localhost'):
         import redis
-        self.r = redis.Redis(host=host, port=6379, db=0)
+        if "REDIS_AUTH_TOKEN" in os.environ:
+            self.r = redis.Redis(host=host, port=6379, db=0, password=os.getenv("REDIS_AUTH_TOKEN"))
+        else:   
+            self.r = redis.Redis(host=host, port=6379, db=0)
     
     def highest(self):
         return max(map(int, self.r.lrange( "bids", 0, -1 )), default=0)
