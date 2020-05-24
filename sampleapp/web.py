@@ -56,6 +56,6 @@ def index():
 def bid():
     bid = int(request.form['bid'])
     bids.add_bid(bid)
-    return redirect("/")
+    return index()
 
 
