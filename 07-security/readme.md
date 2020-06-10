@@ -40,8 +40,8 @@ minikube start --network-plugin=cni --extra-config=kubelet.network-plugin=cni --
 and after minikube started we install Cilium:
 
 ```bash
-kubectl create -n kube-system -f https://raw.githubusercontent.com/cilium/cilium/1.3.2/examples/kubernetes/addons/etcd/standalone-etcd.yaml
-kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.3/examples/kubernetes/1.12/cilium.yaml
+minikube ssh -- sudo mount bpffs -t bpf /sys/fs/bpf
+kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.7/install/kubernetes/quick-install.yaml
 ```
 
 Now wait until all pods are successfully deployed:

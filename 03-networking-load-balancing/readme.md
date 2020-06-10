@@ -21,7 +21,7 @@ spec:
   type: ClusterIP
 ```
 
-Now access this service from your bastion pod using its name and try to answer the following questions.
+Now access this service from your bastion pod (`kubectl run my-shell --rm -it --image amouat/network-utils -- bash`) using its name and try to answer the following questions.
 
 - What kind of service did you create?
 - Whats the IP of this service?

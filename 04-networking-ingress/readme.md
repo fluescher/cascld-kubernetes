@@ -56,3 +56,4 @@ No if you connect with your browser to the minikube ip you should see the auctio
 - What happens if you configured a wrong backend?
 - Can you access the ingress ressource from outside of the cluster?
 - Can you access the ingress ressource from inside the cluster?
+- Try to draw a short diagram showing all involved components

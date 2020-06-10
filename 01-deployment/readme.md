@@ -14,6 +14,10 @@ kubectl describe nodes
 kubectl get pods -o wide -n kube-system
 ```
 
+We use kubectl as the main interface to minikube. You find a cheat sheet here: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+Kubernetes provides a Dashboard as well to visualize the cluster state: `minikube dashboard`
+
 ## 1. Create a Kubernetes Namespace
 
 ```bash
@@ -53,16 +57,16 @@ Monitor the deployment of your webserver using the following command: `kubectl g
 
 ## 3. Connect to your webserver
 
-After the deployment is finished create another temporary pod to use as a bastion you can attach to. This way you have a shell inside a cluster and can experiment with your newly deployed service.
-
-```bash
-kubectl run my-shell --rm -it --image amouat/network-utils -- bash
-```
-
 Find out the cluster ip of your pod (execute this on your machine):
 
 ```bash
 kubectl get pods -o wide
+```
+
+After the deployment is finished create another temporary pod to use as a bastion you can attach to. This way you have a shell inside a cluster and can experiment with your newly deployed service.
+
+```bash
+kubectl run my-shell --rm -it --image amouat/network-utils -- bash
 ```
 
 Execute on the connected bastion pod.
@@ -73,19 +77,27 @@ curl -i <podip>
 
 ## 4. Deploy our sampleapplication
 
-After we saw our deployment worked let's deploy our sample application using the image `fluescher/cascld:latest`. To do that, take the YAML file of your first deployment and change the image name.
+After we saw our deployment worked let's deploy our sample application using the image `fluescher/cascld:latest`. To do that, take the YAML file of your first deployment and change the image name. You can update the deployment using `kubectl apply -f web.yml`
 
 The application listens on port 80. Show the logs of the newly started pod using `kubectl logs <podname>`
 
-To view the application in your browser, you can use port forwarding: `kubectl port-forward <podname> 8000:80` and then visit localhost:8000.
+To view the application in your browser, you can use port forwarding: `kubectl port-forward <podname> 8000:80` and then visit localhost:8000 from your browser.
 
 You should see this page:
 
 ![Webapp](webapp.png "Auction App")
 
+
+- What happens if you delete a POD?
+
 ## 5. (Bonus) Limit Resources
 
 Limit the resources of the webapplication to 100MB of RAM and 100 Mili CPUs. You find an example here: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory
+
+To find out how to size the limits you can use metrics to find out how much memory your service needs. This is a minikube addon that needs to be enabled using `minikube addons enable metrics-server`
+
+After that you can use `kubectl top` to get metrics for pods and nodes. What happens if you limit the memory to lower than 30m?
+
 
 ## 6. (Bonus) Add Health Checks
 

@@ -8,7 +8,9 @@ It's time to scale our deployment. Add another instance of our webapplication:
 kubectl scale --replicas=2 deployment/web
 ```
 
-Connect to both the instances using port-forwarding.
+This scales the deployment temporarily. Update web.yml as well.
+
+Connect to both the instances using port-forwarding. You need to specify different local ports.
 
 - What do you notice when comparing the highest bids?
 - Why is that?
@@ -40,7 +42,7 @@ spec:
 ```
 
 Deploy the application.
-Watch the application getting deployed.
+Watch the application getting deployed. Have a look at the Redis logfiles.
 
 ## 2. Connect the two services together
 
