@@ -1,7 +1,7 @@
 TAG=latest
 
 docker:
-	docker build . -t fluescher/cascld:${TAG}
+	docker build . -t matthiasbrun/cascld:${TAG}
 
 push:
-	docker push fluescher/cascld:${TAG}
+	docker push matthiasbrun/cascld:${TAG}

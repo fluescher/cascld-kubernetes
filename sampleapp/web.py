@@ -22,6 +22,32 @@ class InMemoryBids:
         self.bids.append(bid)
 
 
+class MysqlBids:
+    def __init__(self, host="localhost", password="password123"):
+        self.host = host
+        self.password = password
+        self.bids = []
+    
+    def connect(self):
+        import mysql.connector
+        return mysql.connector.connect(user="bidapp", password="password123", host=self.host, port="3306", database="bidapp")
+
+    def highest(self):
+        connection = self.connect()
+        cursor = connection.cursor()
+        cursor.execute("SELECT MAX(bid) FROM bid")
+        row = cursor.fetchone()
+        connection.close()
+        return 0 if row[0] == None else row[0]
+
+    def add_bid(self, bid):
+        connection = self.connect()
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO bid (bid) VALUES (%s)", (int(bid),))
+        connection.commit()
+        connection.close()
+
+
 class RedisBids:
     def __init__(self, host='localhost'):
         import redis
@@ -42,6 +68,9 @@ def create_bids():
     if "REDIS_HOST" in os.environ:
         logger.info("Using redis backend on " + os.getenv("REDIS_HOST"))
         return RedisBids(os.getenv("REDIS_HOST"))
+    elif "MYSQL_HOST" in os.environ:
+        logger.info("Using mysql backend on " + os.getenv("MYSQL_HOST"))
+        return MysqlBids(os.getenv("MYSQL_HOST"), os.getenv("MYSQL_PASSWORD"))
     else:
         logger.info("Using inmemory bid store")
         return InMemoryBids()
