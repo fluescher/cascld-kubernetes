@@ -30,7 +30,7 @@ class MysqlBids:
     
     def connect(self):
         import mysql.connector
-        return mysql.connector.connect(user="bidapp", password="password123", host=self.host, port="3306", database="bidapp")
+        return mysql.connector.connect(user="bidapp", password=self.password, host=self.host, port="3306", database="bidapp")
 
     def highest(self):
         connection = self.connect()
