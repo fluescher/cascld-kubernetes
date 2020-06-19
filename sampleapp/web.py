@@ -23,14 +23,17 @@ class InMemoryBids:
 
 
 class MysqlBids:
-    def __init__(self, host="localhost", password="password123"):
+    def __init__(self, host="localhost", password="password123", unix_socket=""):
+        self.unix_socket = unix_socket
         self.host = host
         self.password = password
-        self.bids = []
     
     def connect(self):
         import mysql.connector
-        return mysql.connector.connect(user="bidapp", password=self.password, host=self.host, port="3306", database="bidapp")
+        if not self.unix_socket: 
+            return mysql.connector.connect(user="bidapp", password=self.password, host=self.host, port="3306", database="bidapp")
+        else:
+            return mysql.connector.connect(user="bidapp", password=self.password, database="bidapp", unix_socket=self.unix_socket)
 
     def highest(self):
         connection = self.connect()
@@ -70,7 +73,10 @@ def create_bids():
         return RedisBids(os.getenv("REDIS_HOST"))
     elif "MYSQL_HOST" in os.environ:
         logger.info("Using mysql backend on " + os.getenv("MYSQL_HOST"))
-        return MysqlBids(os.getenv("MYSQL_HOST"), os.getenv("MYSQL_PASSWORD"))
+        return MysqlBids(host=os.getenv("MYSQL_HOST"))
+    elif "MYSQL_UNIX_SOCKET" in os.environ:
+        logger.info("Using mysql backend with unix socket on " + os.getenv("MYSQL_UNIX_SOCKET"))
+        return MysqlBids(unix_socket=os.getenv("MYSQL_UNIX_SOCKET"), password=os.getenv("MYSQL_PASSWORD"))
     else:
         logger.info("Using inmemory bid store")
         return InMemoryBids()
