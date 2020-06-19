@@ -22,6 +22,35 @@ class InMemoryBids:
         self.bids.append(bid)
 
 
+class MysqlBids:
+    def __init__(self, host="localhost", password="password123", unix_socket=""):
+        self.unix_socket = unix_socket
+        self.host = host
+        self.password = password
+    
+    def connect(self):
+        import mysql.connector
+        if not self.unix_socket: 
+            return mysql.connector.connect(user="bidapp", password=self.password, host=self.host, port="3306", database="bidapp")
+        else:
+            return mysql.connector.connect(user="bidapp", password=self.password, database="bidapp", unix_socket=self.unix_socket)
+
+    def highest(self):
+        connection = self.connect()
+        cursor = connection.cursor()
+        cursor.execute("SELECT MAX(bid) FROM bid")
+        row = cursor.fetchone()
+        connection.close()
+        return 0 if row[0] == None else row[0]
+
+    def add_bid(self, bid):
+        connection = self.connect()
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO bid (bid) VALUES (%s)", (int(bid),))
+        connection.commit()
+        connection.close()
+
+
 class RedisBids:
     def __init__(self, host='localhost'):
         import redis
@@ -42,6 +71,12 @@ def create_bids():
     if "REDIS_HOST" in os.environ:
         logger.info("Using redis backend on " + os.getenv("REDIS_HOST"))
         return RedisBids(os.getenv("REDIS_HOST"))
+    elif "MYSQL_HOST" in os.environ:
+        logger.info("Using mysql backend on " + os.getenv("MYSQL_HOST"))
+        return MysqlBids(host=os.getenv("MYSQL_HOST"))
+    elif "MYSQL_UNIX_SOCKET" in os.environ:
+        logger.info("Using mysql backend with unix socket on " + os.getenv("MYSQL_UNIX_SOCKET"))
+        return MysqlBids(unix_socket=os.getenv("MYSQL_UNIX_SOCKET"), password=os.getenv("MYSQL_PASSWORD"))
     else:
         logger.info("Using inmemory bid store")
         return InMemoryBids()
