@@ -35,4 +35,4 @@ Now configure another service for our redis pod and replace the ip of Redis in t
 Now change the type of the created auction service (you need to delete it to change the type: `kubectl delete svc auction`). Compare the output of the name resolution `nslookup auction` from inside your bastion pod.
 
 1. Change the service type to NodePort. What changes? Can you access your service from outside?
-2. Add the clusterIP: None to your service definition. What happened now? On which port do you reach the service now?
+2. Change back to type: ClusterIP. Add the clusterIP: None to your service definition. What happened now? On which IP do you reach the service now?

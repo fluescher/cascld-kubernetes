@@ -1,6 +1,6 @@
 # Security
 
-Connect to a shell in one of the webapplication instances. Check the user the webapplication is running with.
+Connect to a shell in one of the webapplication instances `kubectl exec -it web-548cbb66d-2bdw8 sh`. Check the user the webapplication is running with using `whoami`
 
 - What user is the webapplication running?
 - Why can this be a problem?
@@ -17,16 +17,9 @@ securityContext:
     runAsUser: 1000
 ```
 
-- What happens to your application? Why?
-- What could you do to fix it if you had access to the docker image?
-- You can influence the Webapplication port by changeing the environment variable `PORT`
-
-## (Bonus) Redis security context
-
-The base redis image is not under our own control. But we still should be able to run is as non-root. To do this we have the additional issue of file system permissions on our mounted volume. Read https://engineering.bitnami.com/articles/running-non-root-containers-on-openshift.html and try to run Redis without root.
+- Can you verify our application runs as regular user? Open a shell and execute `whoami` and `ps`
 
 ## (Bonus) Isolate Redis 
-
 
 ### Install Cilium 
 
@@ -34,14 +27,14 @@ Not all Kuberenetes NetworkProvider support NetworkPolicies (https://kubernetes.
 
 ```bash
 minikube delete
-minikube start --network-plugin=cni --extra-config=kubelet.network-plugin=cni --memory=5120
+minikube start --network-plugin=cni --memory=5120
 ```
 
 and after minikube started we install Cilium:
 
 ```bash
 minikube ssh -- sudo mount bpffs -t bpf /sys/fs/bpf
-kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.7/install/kubernetes/quick-install.yaml
+kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.8/install/kubernetes/quick-install.yaml
 ```
 
 Now wait until all pods are successfully deployed:
@@ -50,14 +43,12 @@ Now wait until all pods are successfully deployed:
 kubectl get pods -n kube-system
 ```
 
-After all pods are ready you can redeploy your application. After successful deployment you can enter the bastion pod and bid:
+After all pods are ready you can redeploy your application using your `web.yml` and `redis.yml` you created in the previous excercises. After successful deployment you can enter the bastion pod and bid:
 
 ```bash
 curl auction # Get currently the highest bid
 curl -X POST auction/bid -d bid=1 # Place a bid
 ```
-
-Unfortunately the minikube ingress controller does not work when cilium is enabled.
 
 ### Add NetworkPolicy
 
@@ -92,8 +83,7 @@ spec:
       port: 6379
 ```
 
-Now add another NetworkPolicy to prevent the webapplication to connect to anything else than the redis node.
-
+- Can you still access our webapplication from the basion pod.
 - How would you handle larger configurations?
 
 ### Limit webapplication egress

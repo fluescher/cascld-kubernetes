@@ -33,7 +33,7 @@ Access the node again from your machine:
 Let's add a route to our auction backend:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: auction-ingress
@@ -44,9 +44,12 @@ spec:
     - http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: auction
-              servicePort: 80
+              service:
+                name: auction
+                port:
+                  number: 80
 ```
 
 No if you connect with your browser to the minikube ip you should see the auction app again:
