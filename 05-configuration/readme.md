@@ -24,7 +24,7 @@ data:
     tcp-backlog 128
 ```
 
-Add the following snippets to the redis container specification:
+Add the following snippets to the redis **container** specification:
 
 ```yaml
 command: ["redis-server"]
@@ -34,7 +34,7 @@ volumeMounts:
     mountPath: /tmp/
 ```
 
-and this:
+and this into the redis **pod** specification::
 
 ```yaml
 volumes:
