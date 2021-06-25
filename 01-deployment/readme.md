@@ -27,7 +27,7 @@ kubectl create ns cas
 And now specify this namespace as the default:
 
 ```bash
-kubectl config set-context $(kubectl config current-context) --namespace=cas
+kubectl config set-context minikube --namespace=cas
 ```
 
 ## 2. Deploy the webapplication
