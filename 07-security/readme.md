@@ -1,6 +1,6 @@
 # Security
 
-Connect to a shell in one of the webapplication instances `kubectl exec -it web-548cbb66d-2bdw8 sh`. Check the user the webapplication is running with using `whoami`
+Connect to a shell in one of the webapplication instances `kubectl exec -it <web-pod-name> sh`. Check the user the webapplication is running with using `whoami`
 
 - What user is the webapplication running?
 - Why can this be a problem?
@@ -27,14 +27,7 @@ Not all Kuberenetes NetworkProvider support NetworkPolicies (https://kubernetes.
 
 ```bash
 minikube delete
-minikube start --network-plugin=cni --memory=5120
-```
-
-and after minikube started we install Cilium:
-
-```bash
-minikube ssh -- sudo mount bpffs -t bpf /sys/fs/bpf
-kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.8/install/kubernetes/quick-install.yaml
+minikube start --network-plugin=cni --cni=cilium --memory=5120 --driver=<virtualbox|hyperv>
 ```
 
 Now wait until all pods are successfully deployed:
