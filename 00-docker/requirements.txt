@@ -1,0 +1,5 @@
+flask
+gunicorn
+json-logging-py
+redis
+mysql-connector-python
