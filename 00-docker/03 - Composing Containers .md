@@ -65,3 +65,15 @@ If you published your image you could reference this as well.
 ## Bonus - Try mysql as well
 
 Try use the mysql instance of docker-compose. If this works, try to replicate the same behaviour using plain docker.
+
+## Bonus - Replicate docker-compose behaviour using plain docker
+
+You are able to replicate docker-compose by using plain docker commands. 
+
+Try to do that by consuling the documentation: https://docs.docker.com/engine/tutorials/networkingcontainers/
+
+Main commands you need to use are:
+
+- `docker network`
+-  docker run parameters: `--net` and `--name`
+
