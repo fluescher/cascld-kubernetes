@@ -28,6 +28,7 @@ Not all Kuberenetes NetworkProvider support NetworkPolicies (https://kubernetes.
 ```bash
 minikube delete
 minikube start --network-plugin=cni --cni=cilium --memory=5120 --driver=<virtualbox|hyperv>
+minikube addons enable ingress
 ```
 
 Now wait until all pods are successfully deployed:
