@@ -25,17 +25,6 @@ version: "3"
 services:
   redis:
     image: "redis:alpine"
-  mysql:
-    image: "mysql:5.7"
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
-    environment:
-      - MYSQL_ROOT_PASSWORD=password123
-      - MYSQL_DATABASE=bidapp
-      - MYSQL_USER=bidapp
-      - MYSQL_PASSWORD=password123
 ```
 
 Start this configuration using `docker-compose up`
@@ -53,7 +42,6 @@ web:
       - REDIS_HOST=redis
     links:
       - redis
-      - mysql
 ``` 
 
 Stop docker compose `docker-compose down` and restart it `docker-compose up`.
@@ -76,4 +64,3 @@ Main commands you need to use are:
 
 - `docker network`
 -  docker run parameters: `--net` and `--name`
-

@@ -5,11 +5,12 @@
 1. Check the images that are already stored on your machine: `docker images`
 2. Pull remote image from registry: `docker pull mysql`
 3. Check your local images again. Can you locate your newly downloaded image: `docker images`
-4. Remove the downloaded image again: `docker rmi mysql`. Verify that the image is not present anymore.
+4. Start a new container: `docker run mysql`
+5. Remove the downloaded image again: `docker rmi mysql`. Verify that the image is not present anymore.
 
 ## Ex 2 - Run public container
 
-Our sample bid app is published on a public container registry as well. 
+Our sample bid app is published on a public container registry as well: https://hub.docker.com/repository/docker/fluescher/cascld/general
 
 This means, you can directly start it, without ever building an image or software.
 

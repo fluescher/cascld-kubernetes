@@ -43,7 +43,7 @@ Update your Dockerfile so that the application files
 
 are copied to the container.
 
-Now you should be able to 
+Now you should be able to rebuild and start the container as you did in Ex 1.
 
 
 ## Bonus - Publish your image to a public registry
