@@ -13,7 +13,8 @@ WORKDIR $APP_HOME
 
 # EX 3: Copy application code (requirements.txt, web.py, templates) here
 
-RUN pip install -r requirements.txt
+# Install after copying requirements.txt
+# RUN pip install -r requirements.txt
 
 ENV PORT 80
 
@@ -28,7 +29,7 @@ Your image should be built successfully. You should find it locally when quering
 
 ## Ex 2 - Start your image locally
 
-Start your image: `docker run mybidapp`. Does the application work?
+Start your image: `docker run -p 80:80 mybidapp`. Does the application work?
 
 You should see an error. Tag your image as failed.
 

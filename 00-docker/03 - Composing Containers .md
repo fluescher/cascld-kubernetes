@@ -6,7 +6,7 @@ Development environments usually need multiple containers composed together.
 
 Our application can persists its state to a database like redis or mysql. 
 
-Start a redis instance in the background: `docker run -d -p 6379:6379 redis:apline`
+Start a redis instance in the background: `docker run -d -p 6379:6379 redis:alpine`
 
 Can you connect to this instance? `curl telnet://localhost:6379`
 
