@@ -1,4 +1,4 @@
-FROM python:3.6-alpine 
+FROM python:3.7-alpine 
 
 # Copy local code to the container image.
 ENV APP_HOME /app
