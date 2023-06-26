@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:80"
     environment:
-      - MYSQL_HOST=redis
+      - REDIS_HOST=redis
     links:
       - redis
       - mysql
