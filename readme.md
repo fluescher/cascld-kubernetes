@@ -1,4 +1,4 @@
-# CAS Cloud: Container Orchestration
+# CAS Cloud: Container Orchestration - Deprecated! See https://github.com/dsi-engineering-ag/kubernetes-hands-on
 
 ## Setup
 
